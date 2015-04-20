@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        function randomPrint(i) { // can change this signature if required
+            var randomInterval = Math.floor(Math.random() * 1000);
+            setTimeout(function () {
+                console.log(i, randomInterval);
+            }, randomInterval);
+        }
+
+
+        var fns = [];
+        for (var i = 0; i < 10; i++) {
+            fns.push(randomPrint.bind(null, i));
+        }
+
+        fns[0]();
+        fns[1]();
+        fns[2]();
+
+
+        function printAfterExecute(fns) { // change this sig if required
+            // print the sum total after all of them have executed
+
+
+        }
+        // todo write code to print out the sum of all the randomIntervals that were used with randomPrint
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

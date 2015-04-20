@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        function factorial(num) {
+            if (num < 1) return 1;
+            return num * factorial(num - 1);
+        }
+
+        // non-memoized version
+        console.log(factorial(5));
+        console.log(factorial(10));
+
+
+        function memoize(fn) {
+            // put a cache property on the function
+            var cache = {};
+            return function () {
+
+                // This is a new function that will be returned
+                // It will internally invoke the function fn
+
+                var args = Array.prototype.slice.call(arguments);
+
+                var hash = args.reduce(function (hash, curr) {
+                    hash += (curr === Object(curr)) ? JSON.stringify(curr) : curr;
+                    return hash;
+                }, '');
+
+                if (typeof cache[hash] === 'undefined') {
+                    console.log('did not find hash in cache: ' + hash);
+                    cache[hash] = fn.apply(null, args);
+                }
+
+                console.log(cache);
+
+                return cache[hash];
+            };
+        }
+
+        var factorial_m = memoize(factorial);
+
+        // memoized version
+        console.log(factorial_m(5));
+        console.log(factorial_m(10));
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
